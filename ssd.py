@@ -3,7 +3,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.autograd import Variable
 from layers import *
-from data import voc, coco, gdgrid
+from data.config import gdgrid
 import os
 
 
@@ -215,4 +215,5 @@ if __name__ == "__main__":
     print(ssd)
     x = torch.randn(1, 3, 300, 300)
     y = ssd(x)
+    print(len(y))
     
