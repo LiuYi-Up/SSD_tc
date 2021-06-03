@@ -1,4 +1,7 @@
+# from torch._C import per_tensor_affine
 from data import *
+from data.transforms import *
+from data.gdgrid import *
 from utils.augmentations import SSDAugmentation
 from layers.modules import MultiBoxLoss
 from ssd import build_ssd
@@ -16,6 +19,8 @@ import numpy as np
 import argparse
 
 
+GDGRID_ROOT = '/home/qingren/Project/Tianchi_dw/Dataset'
+
 def str2bool(v):
     return v.lower() in ("yes", "true", "t", "1")
 
@@ -23,9 +28,9 @@ def str2bool(v):
 parser = argparse.ArgumentParser(
     description='Single Shot MultiBox Detector Training With Pytorch')
 train_set = parser.add_mutually_exclusive_group()
-parser.add_argument('--dataset', default='VOC', choices=['VOC', 'COCO'],
-                    type=str, help='VOC or COCO')
-parser.add_argument('--dataset_root', default=VOC_ROOT,
+parser.add_argument('--dataset', default='GDGRID',
+                    type=str, help='GDGRID')
+parser.add_argument('--dataset_root', default=GDGRID_ROOT,
                     help='Dataset root directory path')
 parser.add_argument('--basenet', default='vgg16_reducedfc.pth',
                     help='Pretrained base model')
@@ -69,24 +74,17 @@ if not os.path.exists(args.save_folder):
 
 
 def train():
-    if args.dataset == 'COCO':
-        if args.dataset_root == VOC_ROOT:
-            if not os.path.exists(COCO_ROOT):
-                parser.error('Must specify dataset_root if specifying dataset')
-            print("WARNING: Using default COCO dataset_root because " +
-                  "--dataset_root was not specified.")
-            args.dataset_root = COCO_ROOT
-        cfg = coco
-        dataset = COCODetection(root=args.dataset_root,
-                                transform=SSDAugmentation(cfg['min_dim'],
-                                                          MEANS))
-    elif args.dataset == 'VOC':
-        if args.dataset_root == COCO_ROOT:
-            parser.error('Must specify dataset if specifying dataset_root')
-        cfg = voc
-        dataset = VOCDetection(root=args.dataset_root,
-                               transform=SSDAugmentation(cfg['min_dim'],
-                                                         MEANS))
+    if args.dataset == 'GDGRID':
+        cfg = gdgrid
+        # dataset = GDGRIDDetection(root=args.dataset_root,
+        #                         transform=SSDAugmentation(cfg['min_dim'],
+        #                                                   MEANS))
+        compose_transforms = Compose([Resize(ispad=False),
+                                      ToTensor(),
+                                      RandomHorizontalFlip()])
+        dataset = DwDataset(args.dataset_root,
+                            compose_transforms,
+                            "train.txt")
 
     if args.visdom:
         import visdom
@@ -143,9 +141,9 @@ def train():
         epoch_plot = create_vis_plot('Epoch', 'Loss', vis_title, vis_legend)
 
     data_loader = data.DataLoader(dataset, args.batch_size,
-                                  num_workers=args.num_workers,
-                                  shuffle=True, collate_fn=detection_collate,
-                                  pin_memory=True)
+                                #   num_workers=args.num_workers,
+                                  shuffle=True, collate_fn=dataset.collate_fn,
+                                  pin_memory=False)
     # create batch iterator
     batch_iterator = iter(data_loader)
     for iteration in range(args.start_iter, cfg['max_iter']):
@@ -163,6 +161,11 @@ def train():
 
         # load train data
         images, targets = next(batch_iterator)
+        # images = np.array(images).astype(int)
+        # images = torch.from_numpy(images)
+        # print('-------------images', images[0])
+        # print(images.size())
+        # print('---------------targets', targets)
 
         if args.cuda:
             images = Variable(images.cuda())
@@ -173,6 +176,11 @@ def train():
         # forward
         t0 = time.time()
         out = net(images)
+        # print('------out', out)
+        # print('------out', out[0].size())
+        # print('------out', out[1].size())
+        # print('------out', out[2].size())
+        # print(targets)
         # backprop
         optimizer.zero_grad()
         loss_l, loss_c = criterion(out, targets)
@@ -180,20 +188,20 @@ def train():
         loss.backward()
         optimizer.step()
         t1 = time.time()
-        loc_loss += loss_l.data[0]
-        conf_loss += loss_c.data[0]
+        loc_loss += loss_l.item()
+        conf_loss += loss_c.item()
 
         if iteration % 10 == 0:
             print('timer: %.4f sec.' % (t1 - t0))
-            print('iter ' + repr(iteration) + ' || Loss: %.4f ||' % (loss.data[0]), end=' ')
+            print('iter ' + repr(iteration) + ' || Loss: %.4f ||' % (loss.item()), end=' ')
 
         if args.visdom:
-            update_vis_plot(iteration, loss_l.data[0], loss_c.data[0],
+            update_vis_plot(iteration, loss_l.item(), loss_c.item(),
                             iter_plot, epoch_plot, 'append')
 
         if iteration != 0 and iteration % 5000 == 0:
             print('Saving state, iter:', iteration)
-            torch.save(ssd_net.state_dict(), 'weights/ssd300_COCO_' +
+            torch.save(ssd_net.state_dict(), 'weights/ssd300_GDGRID_' +
                        repr(iteration) + '.pth')
     torch.save(ssd_net.state_dict(),
                args.save_folder + '' + args.dataset + '.pth')
