@@ -82,6 +82,7 @@ def train():
         compose_transforms = Compose([Resize(ispad=False),
                                       ToTensor(),
                                       RandomHorizontalFlip()])
+
         dataset = DwDataset(args.dataset_root,
                             compose_transforms,
                             "train.txt")
@@ -176,11 +177,7 @@ def train():
         # forward
         t0 = time.time()
         out = net(images)
-        # print('------out', out)
-        # print('------out', out[0].size())
-        # print('------out', out[1].size())
-        # print('------out', out[2].size())
-        # print(targets)
+
         # backprop
         optimizer.zero_grad()
         loss_l, loss_c = criterion(out, targets)
