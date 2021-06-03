@@ -1,0 +1,31 @@
+2021-06-03 11:09:31,978 - gdgrid.py[line:105] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/3_images/fa3e3061_751b_40bd_ae9c_d4768a41db16.JPG format not JPEG, is MPO
+2021-06-03 11:09:32,377 - gdgrid.py[line:102] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/3_images/d0c6ecbd_2d36_4e5e_9754_01f3adba794c.jpg no items 
+2021-06-03 11:09:32,515 - gdgrid.py[line:102] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/3_images/e3044d32_16a1_4f39_8a99_4023139c849f.jpg no items 
+2021-06-03 11:09:33,052 - gdgrid.py[line:105] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/3_images/2f894e04_f939_4f48_8098_07687cf29c42.jpg format not JPEG, is None
+2021-06-03 11:09:35,524 - gdgrid.py[line:102] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/3_images/213c7acb_433e_48c0_930b_49601eb3fdfd.jpg no items 
+2021-06-03 11:09:35,663 - gdgrid.py[line:102] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/3_images/2cb83f22_14db_4fcc_90dd_e0b8b5e3b72d.jpg no items 
+2021-06-03 11:09:35,799 - gdgrid.py[line:105] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/3_images/cc88707d_0ec3_4284_9dcd_3e70d13162b2.JPG format not JPEG, is MPO
+2021-06-03 11:09:36,253 - gdgrid.py[line:105] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/3_images/be8e5877_c9d5_4dfb_be30_65fc5b5afbde.JPG format not JPEG, is MPO
+2021-06-03 11:09:36,681 - gdgrid.py[line:102] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/3_images/dd329074_f393_402d_9829_563724dd7905.jpg no items 
+2021-06-03 11:09:37,263 - gdgrid.py[line:105] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/3_images/567294ca_027b_4b99_b24e_fb883d81d8f1.jpg format not JPEG, is None
+2021-06-03 11:09:37,345 - gdgrid.py[line:105] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/3_images/a627d7c6_9165_43f9_bac7_de1f6c32f7d8.JPG format not JPEG, is MPO
+2021-06-03 11:09:37,852 - gdgrid.py[line:102] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/3_images/0ad47e16_1c5b_40ec_92f3_4ed702862299.jpg no items 
+2021-06-03 11:09:37,995 - gdgrid.py[line:105] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/3_images/f0dbe7da_c35a_47cb_9582_27c0438b9967.JPG format not JPEG, is MPO
+2021-06-03 11:09:38,830 - gdgrid.py[line:105] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/3_images/7062432a_c761_4e27_b288_e3ebd0e87c51.jpg format not JPEG, is None
+2021-06-03 11:09:39,340 - gdgrid.py[line:105] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/3_images/21d18e73_6729_4282_9318_130501ebd4e8.jpg format not JPEG, is None
+2021-06-03 11:09:39,509 - gdgrid.py[line:102] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/3_images/170db991_c109_4e61_b927_892b72f1ad51.jpg no items 
+2021-06-03 11:09:40,115 - gdgrid.py[line:102] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/3_images/49620e02_ba51_4a22_b09c_cfa9d40ba0e5.jpg no items 
+2021-06-03 11:09:40,194 - gdgrid.py[line:102] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/3_images/fff867d1_52ff_4232_8731_dcecb368c993.jpg no items 
+2021-06-03 11:09:40,417 - gdgrid.py[line:102] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/3_images/a9ff8ece_12c0_4ed2_b615_7147eebe8da0.jpg no items 
+2021-06-03 11:09:40,553 - gdgrid.py[line:102] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/3_images/3ebc740e_2bf6_497b_8ce3_9ecb81dd469b.jpg no items 
+2021-06-03 11:09:40,684 - gdgrid.py[line:105] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/3_images/2f0f8ae7_9c32_42c5_9958_4451f3e54bdb.JPG format not JPEG, is MPO
+2021-06-03 11:09:41,658 - gdgrid.py[line:102] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/3_images/63249e02_59ca_4d35_a5c4_3e313d87ba90.jpg no items 
+2021-06-03 11:09:41,796 - gdgrid.py[line:105] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/3_images/f3328f86_c0b1_47a1_8adf_88d7ffd328a1.JPG format not JPEG, is MPO
+2021-06-03 11:09:42,223 - gdgrid.py[line:105] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/3_images/26f8efdc_aa47_45ba_a942_5ec309459047.JPG format not JPEG, is MPO
+2021-06-03 11:09:43,080 - gdgrid.py[line:105] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/3_images/cbaf7700_7a32_4c0d_bd94_6fbeeff06fff.jpg format not JPEG, is None
+2021-06-03 11:09:43,247 - gdgrid.py[line:102] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/3_images/f073a013_3c78_4d1b_969c_390460f6bb7b.jpg no items 
+2021-06-03 11:09:43,328 - gdgrid.py[line:102] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/3_images/963cbb87_ed61_4f5e_a672_a31b05a15336.jpg no items 
+2021-06-03 11:09:43,409 - gdgrid.py[line:105] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/3_images/7e39b1e0_44ec_4f30_aa48_9d72f69ad4cc.JPG format not JPEG, is MPO
+2021-06-03 11:09:43,811 - gdgrid.py[line:102] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/3_images/0dbcba6c_d854_4708_b2a7_e963d142e5f4.jpg no items 
+2021-06-03 11:09:44,036 - gdgrid.py[line:102] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/3_images/147c39c9_1b3e_4207_a44e_ac462e584c0a.jpg no items 
+2021-06-03 11:09:44,171 - gdgrid.py[line:102] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/3_images/e4411da1_fe2f_4d2d_bb27_cea590c0655f.jpg no items 

@@ -1,7 +1,6 @@
 python train.py \
 --dataset GDGRID \
---dataset_root /home/lab/Python_pro/Tianchi/Dataset/train \
---dataset_root /home/qingren/Project/Tianchi_dw/Dataset \
+--dataset_root /home/lab/Python_pro/Tianchi/Dataset \
 --basenet vgg16_reducedfc.pth \
 --batch_size 4 \
 --start_iter 0 \

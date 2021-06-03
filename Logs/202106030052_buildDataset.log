@@ -1,0 +1,12 @@
+2021-06-03 00:52:50,533 - gdgrid.py[line:105] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/train/3_images/567294ca_027b_4b99_b24e_fb883d81d8f1.jpg format not JPEG, is None
+2021-06-03 00:52:50,616 - gdgrid.py[line:105] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/train/3_images/f0dbe7da_c35a_47cb_9582_27c0438b9967.JPG format not JPEG, is MPO
+2021-06-03 00:52:51,011 - gdgrid.py[line:102] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/train/3_images/170db991_c109_4e61_b927_892b72f1ad51.jpg no items 
+2021-06-03 00:52:51,146 - gdgrid.py[line:105] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/train/3_images/cc88707d_0ec3_4284_9dcd_3e70d13162b2.JPG format not JPEG, is MPO
+2021-06-03 00:52:53,801 - gdgrid.py[line:105] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/train/3_images/21d18e73_6729_4282_9318_130501ebd4e8.jpg format not JPEG, is None
+2021-06-03 00:52:53,886 - gdgrid.py[line:105] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/train/3_images/be8e5877_c9d5_4dfb_be30_65fc5b5afbde.JPG format not JPEG, is MPO
+2021-06-03 00:52:54,317 - gdgrid.py[line:105] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/train/3_images/26f8efdc_aa47_45ba_a942_5ec309459047.JPG format not JPEG, is MPO
+2021-06-03 00:52:54,700 - gdgrid.py[line:102] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/train/3_images/0dbcba6c_d854_4708_b2a7_e963d142e5f4.jpg no items 
+2021-06-03 00:52:55,391 - gdgrid.py[line:102] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/train/3_images/e3044d32_16a1_4f39_8a99_4023139c849f.jpg no items 
+2021-06-03 00:52:55,479 - gdgrid.py[line:105] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/train/3_images/fa3e3061_751b_40bd_ae9c_d4768a41db16.JPG format not JPEG, is MPO
+2021-06-03 00:52:55,872 - gdgrid.py[line:102] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/train/3_images/dd329074_f393_402d_9829_563724dd7905.jpg no items 
+2021-06-03 00:52:56,104 - gdgrid.py[line:102] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/train/3_images/213c7acb_433e_48c0_930b_49601eb3fdfd.jpg no items 
