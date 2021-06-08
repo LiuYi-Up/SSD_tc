@@ -130,8 +130,8 @@ def train():
 
     epoch_size = len(dataset) // args.batch_size
     print('Training SSD on:', dataset.name)
-    print('Using the specified args:')
-    print(args)
+    # print('Using the specified args:')
+    # print(args)
 
     step_index = 0
 
@@ -162,11 +162,6 @@ def train():
 
         # load train data
         images, targets = next(batch_iterator)
-        # images = np.array(images).astype(int)
-        # images = torch.from_numpy(images)
-        # print('-------------images', images[0])
-        # print(images.size())
-        # print('---------------targets', targets)
 
         if args.cuda:
             images = Variable(images.cuda())

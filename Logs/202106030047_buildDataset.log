@@ -1,4 +1,0 @@
-2021-06-03 00:47:35,882 - gdgrid.py[line:105] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/train/3_images/be8e5877_c9d5_4dfb_be30_65fc5b5afbde.JPG format not JPEG, is MPO
-2021-06-03 00:47:36,310 - gdgrid.py[line:102] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/train/3_images/0dbcba6c_d854_4708_b2a7_e963d142e5f4.jpg no items 
-2021-06-03 00:47:36,447 - gdgrid.py[line:102] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/train/3_images/e3044d32_16a1_4f39_8a99_4023139c849f.jpg no items 
-2021-06-03 00:47:36,532 - gdgrid.py[line:102] - WARNING: /home/lab/Python_pro/Tianchi/Dataset/train/3_images/213c7acb_433e_48c0_930b_49601eb3fdfd.jpg no items 

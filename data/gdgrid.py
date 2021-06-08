@@ -19,7 +19,7 @@ class DwImage:
         self.info = dict()
         
         # read json string
-        label2num = {'监护袖章(红only)':1, 'offground':2, 'ground':3, 'safebelt':4}
+        label2num = {'监护袖章(红only)':0, 'offground':1, 'ground':2, 'safebelt':3}
         info_dict = json.loads(para_list[5][1:-1].replace('""', '"'))
         boxes = []
         labels = []
@@ -79,8 +79,8 @@ class DwDataset(Dataset):
                 lines = annotations.readlines()
                 for row in txt.readlines():
                     row = int(row.strip())
-                    assert row < 2548, "[ERROR] row_index {} is out of range".format(row)
-                    self.img_list.append(DwImage(lines[row].strip()))
+                    assert row < 2549, "[ERROR] row_index {} is out of range".format(row)
+                    self.img_list.append(DwImage(lines[row-1].strip()))
                         
         
     def __len__(self):
@@ -103,15 +103,25 @@ class DwDataset(Dataset):
         
         if image.format != "JPEG":
             logger.warning("{} format not JPEG, is {}".format(img_path, image.format))
+            image = image.convert("RGB")
 
         # target = dict()
         # target['boxes'] = torch.as_tensor(img_info['boxes'], dtype=torch.float32)
         # target['labels'] = torch.as_tensor(img_info['labels'], dtype=torch.int64)
     
-        img_boxes = img_info['boxes'].astype(int)
+        img_boxes = img_info['boxes']
+        img_labels = img_info['labels']
+
+        assert len(img_boxes) == len(img_boxes), "[ERROR] boxes num is unequal to labels {}".format(img_path)
         img_labels = np.array(img_info['labels']).astype(int)
         img_labels = img_labels.reshape(-1,1)
+        b = img_boxes.shape
+        l = img_labels.shape
+        # print('-----------------', (img_boxes.shape, img_labels.shape))
+        if b == (0,) or l == (0,1):
+            print(img_path)
         target = np.concatenate((img_boxes, img_labels), axis=1)
+        target = torch.FloatTensor(target)
 
         if self.transforms is not None:
             image, target = self.transforms(image, target)
@@ -125,7 +135,7 @@ class DwDataset(Dataset):
             imgs = []
             for sample in batch:
                 imgs.append(sample[0])
-                targets.append(torch.FloatTensor(sample[1]))
+                targets.append(sample[1])
             # print("-----------", torch.stack(imgs, 0))
             return torch.stack(imgs, 0), targets
 
