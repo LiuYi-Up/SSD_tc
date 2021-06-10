@@ -105,6 +105,7 @@ def train():
         vgg_weights = torch.load(args.save_folder + args.basenet)
         print('Loading base network...')
         ssd_net.vgg.load_state_dict(vgg_weights)
+        losslist = []
 
     if args.cuda:
         net = net.cuda()
@@ -172,7 +173,10 @@ def train():
         # forward
         t0 = time.time()
         out = net(images)
-
+        print(len(out))
+        print(len(targets))
+        print(out[len(out)-1])
+        print(targets[len(targets)-1])
         # backprop
         optimizer.zero_grad()
         loss_l, loss_c = criterion(out, targets)
@@ -182,10 +186,15 @@ def train():
         t1 = time.time()
         loc_loss += loss_l.item()
         conf_loss += loss_c.item()
+        losslist.append(loss.item())
 
         if iteration % 10 == 0:
             print('timer: %.4f sec.' % (t1 - t0))
             print('iter ' + repr(iteration) + ' || Loss: %.4f ||' % (loss.item()), end=' ')
+            np.save("./loss/loss.npy", np.array(losslist))
+
+        if iteration % 100 == 0:
+            pass
 
         if args.visdom:
             update_vis_plot(iteration, loss_l.item(), loss_c.item(),
