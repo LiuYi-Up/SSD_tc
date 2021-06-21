@@ -1,7 +1,7 @@
 import torch
 from torch.autograd import Function
 from ..box_utils import decode, nms
-from data import gdgrid as cfg
+from data.config import gdgrid as cfg
 
 
 class Detect(Function):
@@ -29,7 +29,7 @@ class Detect(Function):
             conf_data: (tensor) Shape: Conf preds from conf layers
                 Shape: [batch*num_priors,num_classes]
             prior_data: (tensor) Prior boxes and variances from priorbox layers
-                Shape: [1,num_priors,4]
+                Shape: [1,num_priors,4]？[num_priors,4]
         """
         num = loc_data.size(0)  # batch size
         num_priors = prior_data.size(0)
@@ -44,13 +44,14 @@ class Detect(Function):
             conf_scores = conf_preds[i].clone()
 
             for cl in range(1, self.num_classes):
-                c_mask = conf_scores[cl].gt(self.conf_thresh)
-                scores = conf_scores[cl][c_mask]
+                c_mask = conf_scores[cl].gt(self.conf_thresh)  # .gt逐元素比较大小，返回由0,1组成的数组, 0代表小于thresh, 1代表大于thresh
+                scores = conf_scores[cl][c_mask]  # 返回值为1的对应下标的元素值(即返回conf_scores中大于thresh的元素集合)
                 if scores.size(0) == 0:
-                    continue
-                l_mask = c_mask.unsqueeze(1).expand_as(decoded_boxes)
-                boxes = decoded_boxes[l_mask].view(-1, 4)
+                    continue  # 若没有置信度说明没有置信度大于阈值的框
+                l_mask = c_mask.unsqueeze(1).expand_as(decoded_boxes)  # 获取对应box的二值矩阵
+                boxes = decoded_boxes[l_mask].view(-1, 4)  # 获取置信度大于thresh的box的左上角和右下角坐标
                 # idx of highest scoring and non-overlapping boxes per class
+                # 返回每个类别的最高的score 的下标, 并且除去那些与该box有较大交并比的box，即使用nms
                 ids, count = nms(boxes, scores, self.nms_thresh, self.top_k)
                 output[i, cl, :count] = \
                     torch.cat((scores[ids[:count]].unsqueeze(1),

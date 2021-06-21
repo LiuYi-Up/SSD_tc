@@ -10,6 +10,8 @@ COLORS = ((255, 0, 0, 128), (0, 255, 0, 128), (0, 0, 255, 128),
 
 MEANS = (104, 117, 123)
 
+GD_CLASSES = ['监护袖章(红only)', 'offground', 'ground', 'safebelt'] 
+
 # SSD300 CONFIGS
 
 gdgrid = {

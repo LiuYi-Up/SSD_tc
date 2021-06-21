@@ -13,7 +13,7 @@ logger = logInit("buildDataset")
 
 class DwImage:
 
-    def __init__(self, csv_str):
+    def __init__(self, csv_str, row_id):
         para_list = csv_str.split(",",5)
         self.image_path = para_list[4]
         self.info = dict()
@@ -48,7 +48,10 @@ class DwImage:
         
         self.info['boxes'] = boxes
         self.info['labels'] = labels
-        # self.info['area'] = area
+        self.info['boxes'] = boxes
+        self.info['labels'] = labels
+        self.info['area'] = area
+        self.info['image_id'] = row_id
 
     def __str__(self):
         return "ImagePath:{}\nInfo:{}".format(self.image_path, self.target)
@@ -80,16 +83,23 @@ class DwDataset(Dataset):
                 for row in txt.readlines():
                     row = int(row.strip())
                     assert row < 2549, "[ERROR] row_index {} is out of range".format(row)
-                    self.img_list.append(DwImage(lines[row-1].strip()))
+                    self.img_list.append(DwImage(lines[row-1].strip(), row-1))
                         
         
     def __len__(self):
         return len(self.img_list)
     
     def __getitem__(self, idx):
+        image, target, _, _ = self.pull_item(idx)
+        
+        return image, target
+
+
+    def pull_item(self, idx):
         img_path = os.path.join(self.dataset_path, self.img_list[idx].image_path)
         img_info = self.img_list[idx].info
         image = Image.open(img_path)
+
         
         # rotate original image
         val2rotate = {3:180, 6:270, 8:90}
@@ -104,6 +114,8 @@ class DwDataset(Dataset):
         if image.format != "JPEG":
             logger.warning("{} format not JPEG, is {}".format(img_path, image.format))
             image = image.convert("RGB")
+        width = image.width
+        height = image.height
 
         # target = dict()
         # target['boxes'] = torch.as_tensor(img_info['boxes'], dtype=torch.float32)
@@ -115,18 +127,16 @@ class DwDataset(Dataset):
         assert len(img_boxes) == len(img_boxes), "[ERROR] boxes num is unequal to labels {}".format(img_path)
         img_labels = np.array(img_info['labels']).astype(int)
         img_labels = img_labels.reshape(-1,1)
-        b = img_boxes.shape
-        l = img_labels.shape
-        # print('-----------------', (img_boxes.shape, img_labels.shape))
-        if b == (0,) or l == (0,1):
-            print(img_path)
+        
+        
         target = np.concatenate((img_boxes, img_labels), axis=1)
         target = torch.FloatTensor(target)
 
         if self.transforms is not None:
             image, target = self.transforms(image, target)
         
-        return image, target
+        return image, target, width, height
+
         
     @staticmethod
     def collate_fn(batch):
@@ -139,6 +149,21 @@ class DwDataset(Dataset):
             # print("-----------", torch.stack(imgs, 0))
             return torch.stack(imgs, 0), targets
 
+    def coco_index(self, idx):
+        img_path = os.path.join(self.dataset_path, self.img_list[idx].image_path)
+        img_info = self.img_list[idx].info
+        # print('-----------------------ima_info', img_info)
+        image = Image.open(img_path)
+        data_height, data_width = image.size
+
+        target = dict()
+        target['boxes'] = torch.as_tensor(img_info['boxes'], dtype=torch.float32)
+        target['labels'] = torch.as_tensor(img_info['labels'], dtype=torch.int64)
+        target['area'] = torch.as_tensor(img_info['area'], dtype=torch.float32)
+        target['image_id'] = torch.as_tensor(img_info['image_id'], dtype=torch.int64)
+        target['iscrowd'] = torch.zeros(len(img_info['boxes']), dtype=torch.int64)
+        
+        return (data_height, data_width), target
 
 if __name__ == '__main__':
     import matplotlib.pyplot as plt

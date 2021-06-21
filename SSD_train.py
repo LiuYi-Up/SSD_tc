@@ -17,7 +17,6 @@ import torch.backends.cudnn as cudnn
 import torch.nn.init as init
 import torch.utils.data as data
 import numpy as np
-import argparse
 from utils.options import parse_args_function
 
 
@@ -131,7 +130,7 @@ if args.train:
         for i, tr_data in enumerate(trainloader):
             # get the inputs
             images, targets = tr_data
-    
+
             # wrap them in Variable
             if use_cuda and torch.cuda.is_available():
                 images = Variable(images.cuda())
@@ -144,10 +143,10 @@ if args.train:
     
             # forward + backward + optimize
             out = net(images)
-            # print(len(out))
-            # print(len(targets))
-            # print(out[len(out)-1])
-            # print(targets[len(targets)-1])
+            # print('-------------',(len(out[0]), len(out[1]), len(out[2])))
+            # a = out[1].cpu().detach().numpy()
+            print('---------------------', out.size(1))
+            
 
             # zero the parameter gradients
             optimizer.zero_grad()
